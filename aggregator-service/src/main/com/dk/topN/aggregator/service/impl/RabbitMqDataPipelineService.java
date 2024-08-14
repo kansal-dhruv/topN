@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.dk.topN.aggregator.util.JsonUtil.covertFormToByteArray;
+
 @Service
 @Log4j2
 public class RabbitMqDataPipelineService implements DataPipelineService<ScoreUpdateForm> {
@@ -26,9 +28,6 @@ public class RabbitMqDataPipelineService implements DataPipelineService<ScoreUpd
     @Autowired
     RabbitTemplate rabbitTemplate;
 
-    @Autowired
-    ObjectMapper objectMapper;
-
     @Override
     public void executePipeline(List<ScoreUpdateForm> data) {
         Map<Integer, List<ScoreUpdateForm>> dataGroupedByHash = hashService.generateHashMap(data);
@@ -38,34 +37,5 @@ public class RabbitMqDataPipelineService implements DataPipelineService<ScoreUpd
             }
 
         });
-    }
-
-
-    @RabbitListener(
-            id = "mainListener",
-            queuesToDeclare = {
-                    @Queue(name = "scores-queue")
-            },
-            executor = "virtualThreadExecutor",
-            concurrency = "1",
-            batch = "1000",
-            ackMode = "AUTO"
-
-    )
-
-    private void scoreListener(List<Message> scoreMessages){
-        List<ScoreUpdateForm> scoreUpdateForms = new ArrayList<>();
-        for (Message scoreMessage : scoreMessages) {
-            scoreUpdateForms.add(objectMapper.convertValue(scoreMessage.getBody(), ScoreUpdateForm.class));
-        }
-        executePipeline(scoreUpdateForms);
-    }
-
-    private byte[] covertFormToByteArray(Object object){
-        try {
-            return objectMapper.writeValueAsBytes(object);
-        } catch (Exception e){
-            throw new RuntimeException("Unable to convert object to byte array", e);
-        }
     }
 }
