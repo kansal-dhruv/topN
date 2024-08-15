@@ -6,6 +6,4 @@ import java.util.function.Function;
 
 public interface HashService <I, R>{
     R generateHash(I input);
-
-    Map<R, List<I>> generateHashMap(List<I> data);
 }

@@ -1,4 +1,4 @@
-package com.dk.topN.aggregator.util;
+package com.dk.topN.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

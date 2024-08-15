@@ -9,6 +9,7 @@
     <artifactId>aggregator-service</artifactId>
     <name>Archetype - aggregator-service</name>
     <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>

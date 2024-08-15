@@ -9,8 +9,10 @@
     <packaging>pom</packaging>
     <description>Data Aggregator Service</description>
     <modules>
-        <module>aggregator-service</module>
         <module>topN-models</module>
+        <module>aggregator-service</module>
+        <module>processor-service</module>
+        <module>topN-scores-service</module>
     </modules>
 
     <parent>
@@ -26,4 +28,25 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
+
+    <build>
+        <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <image>-->
+<!--                        <name>kansaldhruv/aggregator</name>-->
+<!--                    </image>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-install-plugin</artifactId>-->
+<!--                <version>3.1.2</version>-->
+<!--            </plugin>-->
+
+        </plugins>
+    </build>
 </project>
