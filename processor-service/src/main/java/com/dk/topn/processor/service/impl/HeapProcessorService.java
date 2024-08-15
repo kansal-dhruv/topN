@@ -19,7 +19,7 @@ import static com.dk.topN.util.JsonUtil.covertFormToByteArray;
 @Log4j2
 public class HeapProcessorService implements ProcessorService<UpdateScoreDto> {
 
-    @Value("${max.heap.size:5}")
+    @Value("${max.heap.size:1000}")
     private int maxHeapSize;
 
     @Autowired

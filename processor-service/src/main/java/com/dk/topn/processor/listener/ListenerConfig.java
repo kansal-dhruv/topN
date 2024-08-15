@@ -1,9 +1,8 @@
-package com.dk.topN.aggregator.listeners;
+package com.dk.topn.processor.listener;
 
-import com.dk.topN.aggregator.service.impl.RabbitMqDataPipelineService;
 import com.dk.topN.models.request.UpdateScoreDto;
+import com.dk.topn.processor.service.impl.HeapProcessorService;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.Argument;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +17,12 @@ import static com.dk.topN.util.JsonUtil.covertFormToByteArray;
 public class ListenerConfig {
 
     @Autowired
-    private RabbitMqDataPipelineService rabbitMqDataPipelineService;
+    private HeapProcessorService heapProcessorService;
 
     @RabbitListener(
-            id = "mainListener",
+            id = "shardListener-1",
             queuesToDeclare = {
-                    @Queue(name = "scores-queue")
+                    @Queue(name = "0")
             },
             containerFactory = "batchContainerFactory"
     )
@@ -32,6 +31,6 @@ public class ListenerConfig {
         for (Message scoreMessage : scoreMessages) {
             updateScoreDtos.add(covertFormToByteArray(scoreMessage.getBody(), UpdateScoreDto.class));
         }
-        rabbitMqDataPipelineService.executePipeline(updateScoreDtos);
+        heapProcessorService.process(updateScoreDtos);
     }
 }
