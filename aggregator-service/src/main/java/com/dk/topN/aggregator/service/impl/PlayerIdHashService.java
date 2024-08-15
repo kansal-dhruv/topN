@@ -2,6 +2,7 @@ package com.dk.topN.aggregator.service.impl;
 
 import com.dk.topN.aggregator.service.MappedHashService;
 import com.dk.topN.models.request.UpdateScoreDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -13,6 +14,9 @@ import java.util.Map;
 @Service
 public class PlayerIdHashService implements MappedHashService<UpdateScoreDto, Integer> {
 
+    @Value("${parallel.queue.workers:1}")
+    private int parallelQueueWorkers;
+
     @Override
     public Integer generateHash(UpdateScoreDto input) {
         //TODO revisit
@@ -20,7 +24,7 @@ public class PlayerIdHashService implements MappedHashService<UpdateScoreDto, In
         for (char c : input.getPlayerId().toCharArray()) {
             hash += c;
         }
-        return Math.abs(hash) % 5;
+        return Math.abs(hash) % parallelQueueWorkers;
     }
 
     @Override
