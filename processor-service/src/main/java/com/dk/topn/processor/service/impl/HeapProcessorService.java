@@ -20,7 +20,7 @@ import static com.dk.topN.util.JsonUtil.covertFormToByteArray;
 public class HeapProcessorService implements ProcessorService<UpdateScoreDto> {
 
     @Value("${max.heap.size:1000}")
-    private int maxHeapSize;
+    protected int maxHeapSize;
 
     @Autowired
     RabbitTemplate rabbitTemplate;

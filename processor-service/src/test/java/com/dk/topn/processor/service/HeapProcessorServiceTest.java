@@ -21,7 +21,7 @@ public class HeapProcessorServiceTest {
     private HeapProcessorService heapProcessorService;
 
     @Test
-    public void test1(){
+    public void test_1000data_100heapsize(){
         for(int i =0;i<=1000;i++) {
             heapProcessorService.process(sampleData());
             List<UpdateScoreDto> heap = heapProcessorService.getCurrentData();

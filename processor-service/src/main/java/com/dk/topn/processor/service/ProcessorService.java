@@ -1,5 +1,7 @@
 package com.dk.topn.processor.service;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 public interface ProcessorService<I> extends ProcessService<I>, PostProcessService<I> {

@@ -30,7 +30,6 @@ public class RabbitMqDataPipelineService implements DataPipelineService<UpdateSc
             for (UpdateScoreDto updateScoreDto : scoreList) {
                 rabbitTemplate.send(hash.toString(), new Message(covertFormToByteArray(updateScoreDto)));
             }
-
         });
     }
 }
