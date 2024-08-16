@@ -14,7 +14,7 @@ import java.util.List;
 import static com.dk.topN.util.JsonUtil.covertFormToByteArray;
 
 @Component
-public class ListenerConfig {
+public class RmqListeners {
 
     @Autowired
     private HeapProcessorService heapProcessorService;

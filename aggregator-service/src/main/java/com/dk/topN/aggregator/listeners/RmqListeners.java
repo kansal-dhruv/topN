@@ -3,7 +3,6 @@ package com.dk.topN.aggregator.listeners;
 import com.dk.topN.aggregator.service.impl.RabbitMqDataPipelineService;
 import com.dk.topN.models.request.UpdateScoreDto;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.Argument;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import java.util.List;
 import static com.dk.topN.util.JsonUtil.covertFormToByteArray;
 
 @Component
-public class ListenerConfig {
+public class RmqListeners {
 
     @Autowired
     private RabbitMqDataPipelineService rabbitMqDataPipelineService;
