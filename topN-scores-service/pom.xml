@@ -8,7 +8,7 @@
         <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.dk.topN</groupId>
+    <groupId>com.dk.topn</groupId>
     <artifactId>topN-scores-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>topN-scores-service</name>
@@ -56,12 +56,12 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.dk.topN</groupId>
+            <groupId>com.dk.topn</groupId>
             <artifactId>topN-models</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.dk.topN</groupId>
+            <groupId>com.dk.topn</groupId>
             <artifactId>processor-service</artifactId>
             <version>${project.version}</version>
         </dependency>

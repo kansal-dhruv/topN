@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <packaging>jar</packaging>
-    <groupId>com.dk.topN</groupId>
+    <groupId>com.dk.topn</groupId>
     <artifactId>processor-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>processor-service</name>
@@ -53,7 +53,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.dk.topN</groupId>
+            <groupId>com.dk.topn</groupId>
             <artifactId>topN-models</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -75,9 +75,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <image>
-                        <name>kansaldhruv/processor</name>
-                    </image>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
