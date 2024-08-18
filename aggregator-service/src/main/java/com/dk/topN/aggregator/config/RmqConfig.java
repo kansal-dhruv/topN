@@ -1,4 +1,4 @@
-package com.dk.topN.aggregator.config;
+package com.dk.topn.aggregator.config;
 
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;

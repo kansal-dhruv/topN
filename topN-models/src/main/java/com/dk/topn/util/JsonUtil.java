@@ -1,4 +1,4 @@
-package com.dk.topN.util;
+package com.dk.topn.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

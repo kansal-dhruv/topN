@@ -1,4 +1,4 @@
-package com.dk.topN.aggregator.config;
+package com.dk.topn.aggregator.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

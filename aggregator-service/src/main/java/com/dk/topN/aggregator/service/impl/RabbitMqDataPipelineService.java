@@ -1,7 +1,7 @@
-package com.dk.topN.aggregator.service.impl;
+package com.dk.topn.aggregator.service.impl;
 
-import com.dk.topN.aggregator.service.DataPipelineService;
-import com.dk.topN.models.request.UpdateScoreDto;
+import com.dk.topn.aggregator.service.DataPipelineService;
+import com.dk.topn.models.dto.ScoreDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-import static com.dk.topN.util.JsonUtil.covertFormToByteArray;
+import static com.dk.topn.util.JsonUtil.covertFormToByteArray;
 
 @Service
 @Log4j2
-public class RabbitMqDataPipelineService implements DataPipelineService<UpdateScoreDto> {
+public class RabbitMqDataPipelineService implements DataPipelineService<ScoreDto> {
 
     @Autowired
     PlayerIdHashService hashService;
@@ -24,11 +24,11 @@ public class RabbitMqDataPipelineService implements DataPipelineService<UpdateSc
     RabbitTemplate rabbitTemplate;
 
     @Override
-    public void executePipeline(List<UpdateScoreDto> data) {
-        Map<Integer, List<UpdateScoreDto>> dataGroupedByHash = hashService.generateHashMap(data);
+    public void executePipeline(List<ScoreDto> data) {
+        Map<Integer, List<ScoreDto>> dataGroupedByHash = hashService.generateHashMap(data);
         dataGroupedByHash.forEach((hash, scoreList)->{
-            for (UpdateScoreDto updateScoreDto : scoreList) {
-                rabbitTemplate.send(hash.toString(), new Message(covertFormToByteArray(updateScoreDto)));
+            for (ScoreDto scoreDto : scoreList) {
+                rabbitTemplate.send(hash.toString(), new Message(covertFormToByteArray(scoreDto)));
             }
         });
     }

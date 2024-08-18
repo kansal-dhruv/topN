@@ -1,4 +1,4 @@
-package com.dk.topN.aggregator;
+package com.dk.topn.aggregator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

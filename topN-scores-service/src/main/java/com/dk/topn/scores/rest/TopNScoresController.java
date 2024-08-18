@@ -1,6 +1,6 @@
 package com.dk.topn.scores.rest;
 
-import com.dk.topN.models.request.UpdateScoreDto;
+import com.dk.topn.models.dto.ScoreDto;
 import com.dk.topn.scores.service.TopNProcessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class TopNScoresController {
     private TopNProcessorService topNProcessorService;
 
     @GetMapping("/top")
-    public List<UpdateScoreDto> getTopScores(){
+    public List<ScoreDto> getTopScores(){
         return topNProcessorService.getCurrentData();
     }
 }

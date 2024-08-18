@@ -1,6 +1,6 @@
 package com.dk.topn.processor.listener;
 
-import com.dk.topN.models.request.UpdateScoreDto;
+import com.dk.topn.models.dto.ScoreDto;
 import com.dk.topn.processor.service.impl.HeapProcessorService;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dk.topN.util.JsonUtil.covertFormToByteArray;
+import static com.dk.topn.util.JsonUtil.covertFormToByteArray;
 
 @Component
 public class RmqListeners {
@@ -27,10 +27,10 @@ public class RmqListeners {
             containerFactory = "batchContainerFactory"
     )
     private void scoreListener(List<Message> scoreMessages){
-        List<UpdateScoreDto> updateScoreDtos = new ArrayList<>();
+        List<ScoreDto> scoreDtos = new ArrayList<>();
         for (Message scoreMessage : scoreMessages) {
-            updateScoreDtos.add(covertFormToByteArray(scoreMessage.getBody(), UpdateScoreDto.class));
+            scoreDtos.add(covertFormToByteArray(scoreMessage.getBody(), ScoreDto.class));
         }
-        heapProcessorService.process(updateScoreDtos);
+        heapProcessorService.process(scoreDtos);
     }
 }
