@@ -39,12 +39,11 @@ public class HeapProcessorService implements ProcessorService<ScoreDto> {
 
     @Override
     public void processData(List<ScoreDto> data) {
-        log.info("recieved a batch of size {}", data.size());
         for (ScoreDto datum : data) {
             maxHeap.add(datum);
             while(maxHeap.size() > maxHeapSize) {
                 ScoreDto removedScore = maxHeap.poll();
-//                log.info("Removed Score: {}", removedScore.getScore());
+                log.debug("Removed Score: {}", removedScore.getScore());
             }
         }
     }
@@ -56,11 +55,8 @@ public class HeapProcessorService implements ProcessorService<ScoreDto> {
 
     @Override
     public void postProcess(List<ScoreDto> data) {
-        int msgcount = 0;
         for (ScoreDto scoreDto : maxHeap) {
             rabbitTemplate.send(topNProcessorQueue, new Message(covertFormToByteArray(scoreDto)));
-            msgcount++;
         }
-        log.info("processed {} messages", msgcount);
     }
 }

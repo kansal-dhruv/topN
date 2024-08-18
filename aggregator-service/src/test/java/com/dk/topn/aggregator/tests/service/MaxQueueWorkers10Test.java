@@ -46,7 +46,6 @@ public class MaxQueueWorkers10Test {
             scoreDto.setPlayerId(String.valueOf(i));
             scoreDto.setScore(rand.nextDouble(MAX_SCORE_VALUE));
             int hashValue = playerIdHashService.generateHash(scoreDto);
-            log.info(hashValue);
             Assertions.assertEquals((i + 8) % 10, hashValue);
         }
 
