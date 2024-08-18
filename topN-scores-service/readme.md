@@ -9,7 +9,7 @@ max.heap.size=<value of k in top k> #default value = 1,000
 It reads all top score from queue, pushed by our processor services.
 The SQL server details and consumer queue name can be configured using the following properties. 
 ```properties
-top-scores-queue=<top scores queueName> //(topn.processor.queue for processor service) default value : top-scores-queue 
+top-scores-queue=<top scores queueName> //(topn.processor.queue for processor service) default value : top-scores-queue
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.username=mysqluser
 spring.datasource.password=mysqlpass

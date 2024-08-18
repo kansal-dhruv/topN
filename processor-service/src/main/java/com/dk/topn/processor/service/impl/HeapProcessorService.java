@@ -22,7 +22,7 @@ public class HeapProcessorService implements ProcessorService<ScoreDto> {
     @Value("${max.heap.size:1000}")
     protected int maxHeapSize;
 
-    @Value("${topn.processor.queue:processed-data-queue}")
+    @Value("${topn.processor.queue:top-scores-queue}")
     private String topNProcessorQueue;
 
     @Autowired

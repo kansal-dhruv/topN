@@ -2,6 +2,7 @@ package com.dk.topn.scores.service;
 
 import com.dk.topn.models.dto.ScoreDto;
 import com.dk.topn.processor.service.impl.HeapProcessorService;
+import com.dk.topn.scores.entity.IdProjection;
 import com.dk.topn.scores.repo.TopScoreRepo;
 import com.dk.topn.scores.entity.TopScores;
 import lombok.extern.log4j.Log4j2;
@@ -30,7 +31,8 @@ public class TopNProcessorService extends HeapProcessorService {
     @Override
     public void postProcess(List<ScoreDto> data) {
         topScoreRepo.saveAll(convertDtoToEntity(data));
-        topScoreRepo.deleteUnderKValues(maxHeapSize);
+        List<Long> idsToKeep = topScoreRepo.getTopKids(maxHeapSize).stream().map(IdProjection::getId).toList();
+        topScoreRepo.deleteByIdNotIn(idsToKeep);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.dk.topn.scores.tests.repo;
 
 import com.dk.topn.processor.listener.RmqListeners;
+import com.dk.topn.scores.entity.IdProjection;
 import com.dk.topn.scores.entity.TopScores;
 import com.dk.topn.scores.repo.TopScoreRepo;
 import org.junit.jupiter.api.Assertions;
@@ -51,7 +52,7 @@ public class TopScoreRepoTest {
         List<TopScores> scores = sampleData(10000);
         List<TopScores> sorted = scores.stream().sorted(Comparator.comparing(TopScores::getScore).reversed()).limit(1000).toList();
         topScoreRepo.saveAll(scores);
-        topScoreRepo.deleteUnderKValues(1000);
+        topScoreRepo.deleteByIdNotIn(topScoreRepo.getTopKids(1000).stream().map(IdProjection::getId).toList());
         List<TopScores> fromDB = topScoreRepo.findAllByOrderByScoreDesc(Pageable.ofSize(1000));
         Assertions.assertEquals(fromDB.size(), 1000);
         for (int i = 0; i < 1000; i++) {
