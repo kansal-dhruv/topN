@@ -22,7 +22,7 @@ public class RmqListeners {
     @RabbitListener(
             id = "mainListener",
             queuesToDeclare = {
-                    @Queue(name = "scores-queue")
+                    @Queue(name = "${data.influx.queue:scores-queue}")
             },
             containerFactory = "batchContainerFactory"
     )
