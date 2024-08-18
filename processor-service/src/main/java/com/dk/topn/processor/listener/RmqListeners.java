@@ -20,9 +20,8 @@ public class RmqListeners {
     private HeapProcessorService heapProcessorService;
 
     @RabbitListener(
-            id = "shardListener-1",
             queuesToDeclare = {
-                    @Queue(name = "0")
+                    @Queue(name = "${consumer.queue.name:0}")
             },
             containerFactory = "batchContainerFactory"
     )

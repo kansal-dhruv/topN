@@ -22,6 +22,9 @@ public class HeapProcessorService implements ProcessorService<ScoreDto> {
     @Value("${max.heap.size:1000}")
     protected int maxHeapSize;
 
+    @Value("${topn.processor.queue:processed-data-queue}")
+    private String topNProcessorQueue;
+
     @Autowired
     RabbitTemplate rabbitTemplate;
 
@@ -55,7 +58,7 @@ public class HeapProcessorService implements ProcessorService<ScoreDto> {
     public void postProcess(List<ScoreDto> data) {
         int msgcount = 0;
         for (ScoreDto scoreDto : maxHeap) {
-            rabbitTemplate.send("processed-data-queue", new Message(covertFormToByteArray(scoreDto)));
+            rabbitTemplate.send(topNProcessorQueue, new Message(covertFormToByteArray(scoreDto)));
             msgcount++;
         }
         log.info("processed {} messages", msgcount);

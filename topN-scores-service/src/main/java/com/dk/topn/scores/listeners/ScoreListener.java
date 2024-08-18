@@ -23,7 +23,7 @@ public class ScoreListener {
     @RabbitListener(
             id = "mainListener",
             queuesToDeclare = {
-                    @Queue(name = "processed-data-queue")
+                    @Queue(name = "${top-scores-queue:top-scores-queue}")
             },
             containerFactory = "batchContainerFactory"
     )
